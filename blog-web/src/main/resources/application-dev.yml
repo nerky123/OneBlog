@@ -12,12 +12,14 @@ spring:
         # 指定SMTP server使用的协议，默认为: smtp
         protocol: smtp
         # 指定SMTP server host.
-        host: xxx
+        host: smtpdm.aliyun.com
         port: 465
         # 指定SMTP server的用户名.
-        username: xxx
+        username: admin@lingpojie.com
+        #用于用户回信的邮件地址
+        replayname: 736669784@qq.com
         # 指定SMTP server登录密码:
-        password: xxx
+        password: YXWyxw110110
         # 指定是否在启动时测试邮件服务器连接，默认为false
         test-connection: false
         properties:
@@ -51,6 +53,8 @@ spring:
 # logging settings
 logging:
   path: /var/tmp/website-blog-web
+  level:
+    root: info
 
 # braum过滤器，用于过滤恶意请求
 braum:
@@ -67,7 +71,6 @@ app:
     # 启用后，项目在启动时会打印数据库（Mysql和Redis）链接信息（包含密码）
     # 代码请参考
     enabledConfigLog: true
-
 me:
     zhyd:
         oauth:
@@ -80,9 +83,9 @@ me:
                 clientSecret:
                 redirectUri:
             weibo:
-                clientId:
-                clientSecret:
-                redirectUri:
+                clientId: 3925075942
+                clientSecret: ea4982e627fc2d9e95649d371ac20aca
+                redirectUri: http://2409cdd6.nat123.cc:42910/oauth/callback/weibo
             dingtalk:
                 clientId:
                 clientSecret:

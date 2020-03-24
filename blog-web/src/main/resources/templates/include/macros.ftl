@@ -65,7 +65,7 @@
             <h4>${title}</h4>
             <p class="blog-description" id="hitokoto"></p>
             <div>
-                <a href="javascript:void(0);" target="_blank" title="点击QQ联系我" onclick="window.open('tencent://message/?uin=${config.qq}&amp;Site=www.${config.domain}&amp;Menu=yes')" rel="external nofollow"><i class="fa fa fa-qq fa-fw"></i>QQ联系</a>
+                <a href="javascript:void(0);" target="_blank" title="点击QQ联系我" onclick="QQContact('${config.qq}')" rel="external nofollow"><i class="fa fa fa-qq fa-fw"></i>QQ联系</a>
                 |
                 <a href="mailto:${config.authorEmail}" target="_blank" title="点击给我发邮件" rel="external nofollow"><i class="fa fa fa-envelope fa-fw"></i>邮箱联系</a>
                 |

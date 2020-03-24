@@ -24,7 +24,7 @@
                     <ol>
                         <li>1.出门喝杯咖啡，一般来说回来的时候限制就被解除了 <i class="fa fa-coffee fa-2x"></i></li>
                         <li>2.文明上网，勿刷流量！</li>
-                        <li>3.请联系<a target="_blank" href="javascript:void(0);" title="点击QQ联系我"onclick="window.open('tencent://message/?uin=${config.qq}&amp;Site=www.${config.domain}&amp;Menu=yes')" rel="external nofollow">网站管理员</a></strong></li>
+                        <li>3.请联系<a target="_blank" href="javascript:void(0);" title="点击QQ联系我"onclick="QQContact('${config.qq}')" rel="external nofollow">网站管理员</a></strong></li>
                     </ol>
                     <div class="clear"></div>
                 </blockquote>

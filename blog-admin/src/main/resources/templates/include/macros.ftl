@@ -46,7 +46,7 @@
                 <@shiro.user>
                 <div class="profile clearfix">
                     <div class="profile_pic">
-                        <img src="/assets/images/loading.gif" alt="..." class="img-circle profile_img">
+                        <img src="/assets/images/favicon.ico" alt="..." class="img-circle profile_img">
                     </div>
                     <div class="profile_info">
                         <span id="hello_msg">&nbsp;</span>
@@ -266,6 +266,7 @@
 </#macro>
 
 <#-- 网站首页的项目介绍内容 -->
+<#--
 <#macro aboutOneBlog>
     <div class="modal fade" id="noticeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
     <div class="modal-dialog modal-lg" role="document" style="width: 70%;">
@@ -342,4 +343,4 @@
         </div>
     </div>
 </div>
-</#macro>
+</#macro>-->

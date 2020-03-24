@@ -9,16 +9,16 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     url: jdbc:mysql://localhost:3306/dblog?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&useSSL=false&allowPublicKeyRetrieval=true
     username: root
-    password: root
+    password: root123
   ####### Redis Config #######
   redis:
-    database: 5
+    database: 0
     # Redis服务器地址
-    host: 127.0.0.1
+    host: 192.168.56.102
     # Redis服务器连接端口
     port: 6379
     # Redis服务器连接密码（默认为空）
-    password: qwe!@#123
+    #password: qwe!@#123
 
   ####### redis缓存服务配置 #######
   session:

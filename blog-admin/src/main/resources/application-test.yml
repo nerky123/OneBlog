@@ -1,7 +1,3 @@
-# Server settings
-server:
-    tomcat:
-        basedir: /var/tmp/website-blog-admin
 # SPRING PROFILES
 spring:
     profiles:
@@ -12,12 +8,14 @@ spring:
         # 指定SMTP server使用的协议，默认为: smtp
         protocol: smtp
         # 指定SMTP server host.
-        host: xxx
+        host: smtpdm.aliyun.com
         port: 465
         # 指定SMTP server的用户名.
-        username: xxx
+        username: admin@lingpojie.com
+        #用于用户回信的邮件地址
+        replayname: 736669784@qq.com
         # 指定SMTP server登录密码:
-        password: xxx
+        password: YXWyxw110110
         # 指定是否在启动时测试邮件服务器连接，默认为false
         test-connection: false
         properties:
@@ -46,14 +44,16 @@ spring:
         # 连接超时时间（毫秒）
         timeout: 5000ms
         # 默认的数据过期时间，主要用于shiro权限管理
-        expire: 2592000
+        expire: 7200000
 # logging settings
 logging:
-  path: /var/tmp/website-blog-admin
+  path: /home/log/website-blog-admin
+  level:
+    root: info
 ####################################自定义配置##########################################
 app:
     # 是否启用kaptcha验证码
-    enableKaptcha: false
+    enableKaptcha: true
     # 启用后，项目在启动时会打印数据库（Mysql和Redis）链接信息（包含密码）
     # 代码请参考
     enabledConfigLog: false

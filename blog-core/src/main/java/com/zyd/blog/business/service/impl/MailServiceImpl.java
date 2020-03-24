@@ -19,6 +19,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import javax.mail.Address;
 import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -49,6 +50,9 @@ public class MailServiceImpl implements MailService {
 
     @Value("${spring.mail.username}")
     private String from;
+    @Value("${spring.mail.replayname}")
+    private String replayname;
+
 
     /**
      * 普通的发送
@@ -58,8 +62,8 @@ public class MailServiceImpl implements MailService {
      */
     @Override
     @Async
-    public void send(MailDetail mailDetail) {
-        sendMessage(mailDetail, from);
+    public String send(MailDetail mailDetail) {
+        return sendMessage(mailDetail, from);
     }
 
     /**
@@ -169,15 +173,32 @@ public class MailServiceImpl implements MailService {
         send(mailDetail);
     }
 
-    private void sendMessage(MailDetail detail, String from) {
+    @Override
+    public String sendToRegister(String mail,String code) {
+        Map config = configService.getConfigs();
+        String template = (String) config.get("mailRegister");
+        MailDetail mailDetail = new MailDetail("零破解网站注册",mail,(String) config.get("authorName"),template.replaceAll("code",code));
+        return send(mailDetail);
+    }
+
+    @Override
+    public String sendToUserForgetPass(String mail,String code) {
+        Map config = configService.getConfigs();
+        String template = (String) config.get("mailRegister");
+        MailDetail mailDetail = new MailDetail("零破解网站密码找回",mail,(String) config.get("authorName"),template.replaceAll("code",code));
+        return send(mailDetail);
+    }
+
+    private String sendMessage(MailDetail detail, String from) {
         log.info("Start to send html email for [{}({})]", detail.getToUsername(), detail.getToMailAddress());
         if (StringUtils.isEmpty(detail.getToMailAddress())) {
             log.warn("邮件接收者为空！");
-            return;
+            return "邮件接收者为空！";
         }
         MimeMessage message = null;
         try {
             message = javaMailSender.createMimeMessage();
+            message.setReplyTo(new Address[]{new InternetAddress(replayname)});
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
             InternetAddress fromAddress = new InternetAddress(MimeUtility.encodeText("网站管理员") + "<" + from + ">");
             helper.setFrom(fromAddress);
@@ -189,8 +210,10 @@ public class MailServiceImpl implements MailService {
                 helper.setCc(detail.getCc());
             }
             javaMailSender.send(message);
+            return "邮件发送成功，请注意接收！";
         } catch (MessagingException | UnsupportedEncodingException e) {
             log.error("Failed to send E-mail. e [{}]", e.getMessage());
+            return "邮件发送失败，具体原因："+e.getMessage();
         }
     }
 }

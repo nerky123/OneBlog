@@ -191,7 +191,7 @@ public class BizCommentServiceImpl implements BizCommentService {
         this.insert(comment);
 
         // 发送邮件通知
-        this.sendEmail(comment);
+        //this.sendEmail(comment);
         return comment;
     }
 

@@ -19,6 +19,12 @@ jQuery(document).ready(function() {
     "undefined" == typeof document.addEventListener && "undefined" == typeof document[a] || document.addEventListener(b, c, !1)
 });
 
+$("body").keyup(function(event){
+    if(event.keyCode==13) {//keyCode=13是回车键
+        $('.btn-login').click();
+    }
+});
+
 function initNavbar() {
     $(".navbar .navbar-nav li").each(function () {
         var $this = $(this);
@@ -134,17 +140,27 @@ function initScrollMenu() {
     function bindScroll() {
         if (sc.scrollTop() >= 100) {
             if (!mainmenu.hasClass("transparent")) {
-                topmenu.animate({opacity: '0'}, 0);
+                //topmenu.animate({opacity: '0'}, 0);
                 mainmenu.addClass('transparent');
                 if (win.width() > 768) {
-                    mainmenu.animate({top: '0', 'z-index': 1000}, 1);
+                    mainmenu.animate({top: '30', 'z-index': 998}, 1);
+                }
+            }
+            if (!topmenu.hasClass("transparent")){
+                topmenu.addClass('transparent');
+                if (win.width() > 768) {
+                    topmenu.animate({top: '0', 'z-index': 1000}, 1);
                 }
             }
         } else {
-            topmenu.animate({opacity: '1'}, 0);
+            //topmenu.animate({opacity: '1'}, 0);
             mainmenu.removeClass('transparent');
             if (win.width() > 768) {
                 mainmenu.animate({top: '30', 'z-index': 998}, 1);
+            }
+            topmenu.removeClass('transparent');
+            if (win.width() > 768) {
+                topmenu.animate({top: '0', 'z-index': 1000}, 1);
             }
         }
     }
@@ -206,12 +222,11 @@ $(function () {
     initArticeMenu();
     initScrollMenu();
 
-    console.group("关于OneBlog");
-    console.log("OneBlog，一个简洁美观、功能强大并且自适应的Java博客\n欢迎进QQ交流群（190886500）");
+    console.group("关于零破解");
+    console.log("有任何问题请联系站长QQ：3285552556");
     console.groupEnd();
-    console.log("%c生活真他妈好玩，因为生活老他妈玩我！", "color:green;font-size:20px;font-weight:blod");
+    console.log("%c非营利性网站", "color:green;font-size:20px;font-weight:blod");
     console.groupEnd();
-    console.log("爱谁谁...");
 
     $('.to-top').toTop({
         autohide: true,//返回顶部按钮是否自动隐藏。可以设置true或false。默认为true
@@ -414,4 +429,153 @@ $(function () {
             $.comment.submit($(this));
         });
     }
+
+    //点击登录
+    $('.btn-login').on('click',function(){
+        if(validator.checkAll1($('#login'))){
+            $('.btn-login').attr("disabled",true);
+            $('.login-loading').removeClass('hide');
+            $.ajax({
+                type: "post",
+                url: "/oauth/login",
+                data: $('form[id="login-form"]').serialize(),
+                success: function (json) {
+                    $('.btn-login').removeAttr("disabled")
+                    $('.login-loading').addClass('hide');
+                    if (json == 'fail') {
+                        $.alert.error('账号或密码错误，请重试！');
+                        return;
+                    }else if(json=='codeError'){
+                        $.alert.error('验证码校验错误，请重试！');
+                        return;
+                    }else if(json=='alreadyLogin'){
+                        $.alert.error('您已经登录啦，嘿嘿嘿');
+                        $('#login').modal('hide')
+                        return;
+                    }
+                    window.location.href  = json;
+                },
+                error: function () {
+                    $.alert.ajaxError();
+                    $('.btn-login').removeAttr("disabled")
+                    $('.login-loading').addClass('hide');
+                }
+            });
+        }
+    });
+
+    //发送忘记密码邮件
+    $('.btn-forget-pass-sendmail').on('click',function(){
+        var email_filter = /^.+@.+\..{2,6}$/;
+        if (email_filter.test($('#forget-email').val())){
+            $('#forget-email').next('i').remove();
+            $.ajax({
+                type: "post",
+                url: "/oauth/sendMail",
+                data: $('form[id="forget-form"]').serialize(),
+                success: function (json) {
+                    $.alert.info(json);
+                    return;
+                },
+                error: function () {
+                    $.alert.ajaxError();
+                }
+            });
+        }else{
+            if ($('#forget-email').next('i').length==0){
+                $('#forget-email').after("<i class=\"fv-plugins-icon fa fa-times\"></i>")
+            }
+        }
+    });
+
+    //修改密码
+    $('.btn-forget-pass').on('click',function(){
+        if(validator.checkAll1($('#forget'))){
+            $('.btn-forget-pass').attr("disabled",true);
+            $('.forget-loading').removeClass('hide');
+            $.ajax({
+                type: "post",
+                url: "/oauth/forget",
+                data: $('form[id="forget-form"]').serialize(),
+                success: function (json) {
+                    $('.btn-forget-pass').removeAttr("disabled")
+                    $('.forget-loading').addClass('hide');
+                    $.alert.info(json);
+                    $('#forget').modal('hide');
+                    $('#login').modal('show');
+                    return;
+                },
+                error: function () {
+                    $('.btn-forget-pass').removeAttr("disabled")
+                    $('.forget-loading').addClass('hide');
+                    $.alert.ajaxError();
+                }
+            });
+        }
+    });
+
+
+    //发送注册邮件
+    $('.btn-register-sendmail').on('click',function(){
+        var email_filter = /^.+@.+\..{2,6}$/;
+        if (email_filter.test($('#register-email').val())){
+            $('#register-email').next('i').remove();
+            $.ajax({
+                type: "post",
+                url: "/oauth/sendMail",
+                data: $('form[id="register-form"]').serialize(),
+                success: function (json) {
+                    $.alert.info(json);
+                    return;
+                },
+                error: function () {
+                    $.alert.ajaxError();
+                }
+            });
+        }else{
+            if ($('#register-email').next('i').length==0){
+                $('#register-email').after("<i class=\"fv-plugins-icon fa fa-times\"></i>")
+            }
+        }
+    });
+
+    //开始注册
+    $('.btn-register').on('click',function(){
+        if(validator.checkAll1($('#register'))){
+            $('.btn-register').attr("disabled",true);
+            $('.register-loading').removeClass('hide');
+            $.ajax({
+                type: "post",
+                url: "/oauth/register",
+                data: $('form[id="register-form"]').serialize(),
+                success: function (json) {
+                    $('.btn-register').removeAttr("disabled")
+                    $('.register-loading').addClass('hide');
+                    $.alert.info(json);
+                    $('#register').modal('hide');
+                    $('#login').modal('show');
+                    return;
+                },
+                error: function () {
+                    $('.btn-register').removeAttr("disabled")
+                    $('.register-loading').addClass('hide');
+                    $.alert.ajaxError();
+                }
+            });
+        }
+    });
+
 });
+
+function QQContact(qq){
+    var system ={};
+    var p = navigator.platform;
+    system.win = p.indexOf("Win") == 0;
+    system.mac = p.indexOf("Mac") == 0;
+    system.x11 = (p == "X11") || (p.indexOf("Linux") == 0);
+    if(system.win||system.mac||system.xll){//如果是电脑跳转到
+        window.location.href="http://wpa.qq.com/msgrd?v=3&uin="+qq+"&site=qq&menu=yes";
+    }else{  //如果是手机,跳转到
+        window.location.href="mqqwpa://im/chat?chat_type=wpa&uin="+qq+"&version=1&src_type=web&web_src=oicqzone.com";
+    }
+}

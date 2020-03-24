@@ -45,6 +45,14 @@ public interface SysUserService extends AbstractService<User, Long> {
     User getByUserName(String userName);
 
     /**
+     * 根据邮箱查找
+     *
+     * @param mail
+     * @return
+     */
+    User getByMail(String mail);
+
+    /**
      * 通过角色Id获取用户列表
      *
      * @param roleId

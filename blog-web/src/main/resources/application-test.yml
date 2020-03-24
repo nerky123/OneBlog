@@ -13,12 +13,14 @@ spring:
         # 指定SMTP server使用的协议，默认为: smtp
         protocol: smtp
         # 指定SMTP server host.
-        host: xxx
+        host: smtpdm.aliyun.com
         port: 465
         # 指定SMTP server的用户名.
-        username: xxx
+        username: admin@lingpojie.com
+        #用于用户回信的邮件地址
+        replayname: 736669784@qq.com
         # 指定SMTP server登录密码:
-        password: xxx
+        password: YXWyxw110110
         # 指定是否在启动时测试邮件服务器连接，默认为false
         test-connection: false
         properties:
@@ -52,6 +54,8 @@ spring:
 # logging settings
 logging:
   path: /var/tmp/website-blog-web
+  level:
+    root: info
 
 # braum过滤器，用于过滤恶意请求
 braum:

@@ -7,6 +7,7 @@ import com.zyd.blog.business.entity.UserPwd;
 import com.zyd.blog.business.enums.UserNotificationEnum;
 import com.zyd.blog.business.enums.UserPrivacyEnum;
 import com.zyd.blog.business.enums.UserStatusEnum;
+import com.zyd.blog.business.enums.UserTypeEnum;
 import com.zyd.blog.business.service.SysUserService;
 import com.zyd.blog.business.vo.UserConditionVO;
 import com.zyd.blog.framework.exception.ZhydCommentException;
@@ -161,6 +162,23 @@ public class SysUserServiceImpl implements SysUserService {
     @Override
     public User getByUserName(String userName) {
         User user = new User(userName, null);
+        SysUser sysUser = this.sysUserMapper.selectOne(user.getSysUser());
+        return null == sysUser ? null : new User(sysUser);
+    }
+
+    /**
+     * 根据邮箱查找
+     *
+     * @param mail
+     * @return
+     */
+    @Override
+    public User getByMail(String mail) {
+        User user = new User();
+        user.setEmail(mail);
+        user.setStatus(1);
+        user.setUserType(UserTypeEnum.USER.name());
+
         SysUser sysUser = this.sysUserMapper.selectOne(user.getSysUser());
         return null == sysUser ? null : new User(sysUser);
     }

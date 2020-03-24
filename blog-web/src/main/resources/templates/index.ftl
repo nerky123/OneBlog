@@ -1,6 +1,6 @@
 <#include "include/macros.ftl">
 <@compress single_line=false>
-<@header title="${config.siteName!} | 一个程序员的个人博客"
+<@header title="${config.siteName!}"
     keywords="${config.homeKeywords!}"
     description="${config.homeDesc!}"
     canonical="/${url!}">
@@ -8,14 +8,11 @@
 
 <div class="container custome-container">
     <@prompt></@prompt>
-    <nav class="breadcrumb">
+ <#--   <nav class="breadcrumb">
         <div class="notify"><i class="fa fa-bullhorn fa-fw"></i></div>
         <div id="scrolldiv">
             <div class="scrolltext">
                 <ul class="list-unstyled" id="notice-box">
-                    <li class="scrolltext-title">
-                        <a href="javascript:void(0)" rel="bookmark">本站正式启用新域名:<a href="https:/www.zhyd.me" target="_blank"><strong>https:/www.zhyd.me</strong></a></a>
-                    </li>
                     <li class="scrolltext-title">
                         <a href="javascript:void(0)" rel="bookmark">活了二十多年，没能为祖国、为人民做点什么，每思及此，伤心欲绝。</a>
                     </li>
@@ -25,7 +22,7 @@
                 </ul>
             </div>
         </div>
-    </nav>
+    </nav>-->
     <div class="row">
         <div class="col-sm-8 blog-main">
             <@articleTag method="recommendedList" pageSize="8">
@@ -101,7 +98,7 @@
                 <article class="fade-in" style="height: auto">
                     <div class="rows">
                         <div class="col-md-10 col-sm-12">
-                            <div class="h3 text-center">亲，啥也没找到啊~~<img src="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/15/j_thumb.gif" alt="[囧]"></div>
+                            <div class="h3 text-center">亲，啥也没找到啊~~<img src="${config.staticWebSite}/img/j_thumb.gif" alt="[囧]"></div>
                             <div class="h5 text-center">换个姿势，再来一次~~</div>
                         </div>
                         <div class="col-md-2 col-sm-12">
@@ -116,7 +113,7 @@
                                 <button class="btn btn-default br-none nav-search-btn pointer" type="submit"><i class="fa fa-search"></i> 搜索</button>
                             </span>
                         </div>
-                        <div class="clear" style="margin-bottom: 10px"></div>
+                       <#-- <div class="clear" style="margin-bottom: 10px"></div>
                         <ul class="list-unstyled list-inline search-hot">
                             <li><strong style="position: relative;top: 2px;color: #999999;">热门搜索：</strong></li>
                             <li><a class="pointer" rel="external nofollow"><span class="label label-default">Java</span></a></li>
@@ -125,7 +122,7 @@
                             <li><a class="pointer" rel="external nofollow"><span class="label label-info">Maven</span></a></li>
                             <li><a class="pointer" rel="external nofollow"><span class="label label-warning">Bootstrap</span></a></li>
                             <li><a class="pointer" rel="external nofollow"><span class="label label-danger">阿里云</span></a></li>
-                        </ul>
+                        </ul>-->
                     </form>
                 </article>
             </#if>

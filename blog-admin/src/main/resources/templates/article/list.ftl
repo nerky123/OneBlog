@@ -125,6 +125,15 @@
                         return '<input type="checkbox" name="top" class="js-switch btn-top" data-id="' + row.id + '" data-type="top" ' + checked + '>';
                     }
                 }, {
+                    field: 'vip',
+                    title: 'vip',
+                    width: '50px',
+                    align: 'center',
+                    formatter: function (code, row, index) {
+                        var checked = code ? 'checked' : '';
+                        return '<input type="checkbox" name="vip" class="js-switch btn-top" data-id="' + row.id + '" data-type="vip" ' + checked + '>';
+                    }
+                }, {
                     field: 'lookCount',
                     title: '浏览',
                     width: '50px',

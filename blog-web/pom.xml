@@ -3,8 +3,8 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>blog-web</artifactId>
-	<packaging>jar</packaging>
+	<artifactId>ROOT</artifactId>
+	<packaging>war</packaging>
 
 	<name>blog-web</name>
 	<description>OneBlog 前台程序</description>
@@ -24,6 +24,39 @@
 			<groupId>com.zyd</groupId>
 			<artifactId>blog-core</artifactId>
         </dependency>
+
+		<!--web相关依赖添加-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<!-- 移除嵌入式tomcat插件 -->
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-tomcat</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<!--<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
+			<scope>provided</scope>
+		</dependency>
+		&lt;!&ndash; https://mvnrepository.com/artifact/javax.websocket/javax.websocket-api &ndash;&gt;
+		<dependency>
+			<groupId>javax.websocket</groupId>
+			<artifactId>javax.websocket-api</artifactId>
+			<version>1.1</version>
+			<scope>provided</scope>
+		</dependency>-->
+
+
 	</dependencies>
 
 	<build>
@@ -42,12 +75,6 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<mainClass>com.zyd.blog.BlogWebApplication</mainClass>
-					<layout>JAR</layout>
-                    <!--构建完整可执行程序，可以直接运行-->
-                    <executable>true</executable>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>

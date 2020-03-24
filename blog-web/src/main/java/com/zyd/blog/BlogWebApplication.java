@@ -3,7 +3,9 @@ package com.zyd.blog;
 import me.zhyd.braum.spring.boot.annotation.EnableBraumConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.ServletComponentScan;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
@@ -19,10 +21,15 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @ServletComponentScan
 @EnableTransactionManagement
 @EnableBraumConfiguration
-public class BlogWebApplication {
+public class BlogWebApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
         SpringApplication.run(BlogWebApplication.class, args);
+    }
+
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        return application.sources(BlogWebApplication.class);
     }
 
 }

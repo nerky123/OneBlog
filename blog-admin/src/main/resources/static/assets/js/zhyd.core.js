@@ -162,7 +162,8 @@ var zhyd = window.zhyd || {
             editor = new E(config.container);
             // 配置编辑器 start
             // 关闭粘贴样式的过滤
-            editor.customConfig.pasteFilterStyle = false;
+            editor.customConfig.pasteFilterStyle = true;
+            editor.customConfig.pasteText = true;
             editor.customConfig.zIndex = 100;
             if (config.textareaName) {
                 $('<textarea class="wangeditor-textarea" id="' + config.textareaName + '" name="' + config.textareaName + '" style="display: none" required="required"></textarea>').insertAfter($(config.container));

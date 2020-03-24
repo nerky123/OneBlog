@@ -1,24 +1,29 @@
 package com.zyd.blog.controller;
 
+import cn.hutool.core.date.DateTime;
+import cn.hutool.core.date.DateUtil;
 import com.github.pagehelper.PageInfo;
 import com.zyd.blog.business.annotation.BussinessLog;
 import com.zyd.blog.business.entity.Article;
+import com.zyd.blog.business.entity.Tags;
+import com.zyd.blog.business.entity.User;
 import com.zyd.blog.business.enums.ArticleStatusEnum;
 import com.zyd.blog.business.enums.PlatformEnum;
-import com.zyd.blog.business.service.BizArticleArchivesService;
-import com.zyd.blog.business.service.BizArticleService;
-import com.zyd.blog.business.service.SysLinkService;
-import com.zyd.blog.business.service.SysUpdateRecordeService;
+import com.zyd.blog.business.service.*;
 import com.zyd.blog.business.vo.ArticleConditionVO;
+import com.zyd.blog.persistence.beans.BizTags;
 import com.zyd.blog.util.ResultUtil;
+import com.zyd.blog.util.SessionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
@@ -48,6 +53,8 @@ public class RenderController {
     private SysLinkService sysLinkService;
     @Autowired
     private SysUpdateRecordeService updateRecordeService;
+    @Autowired
+    private BizTagsService tagsService;
 
     /**
      * 加载首页的数据
@@ -183,10 +190,21 @@ public class RenderController {
      */
     @GetMapping("/article/{articleId}")
     @BussinessLog(value = "进入文章[{2}]详情页", platform = PlatformEnum.WEB)
-    public ModelAndView article(Model model, @PathVariable("articleId") Long articleId) {
+    public ModelAndView article(Model model, @PathVariable("articleId") Long articleId,HttpSession httpSession,HttpServletRequest request) {
         Article article = bizArticleService.getByPrimaryKey(articleId);
         if (article == null || ArticleStatusEnum.UNPUBLISHED.getCode() == article.getStatusEnum().getCode()) {
             return ResultUtil.forward("/error/404");
+        }
+        //如果是vip文章，需要登录并且注册满三天才可以
+        if (article.getVip()){
+            httpSession.setAttribute("redirectUrl",request.getRequestURL().toString());
+            User user = SessionUtil.getUser();
+            if (user==null){
+                return ResultUtil.view("vipMessage");
+            }else if(DateUtil.offsetDay(user.getCreateTime(),3).after(DateTime.now())){
+                model.addAttribute("time",DateUtil.offsetDay(user.getCreateTime(),3).toString("yyyy年MM月dd日 HH时mm分ss秒"));
+                return ResultUtil.view("vipMessage");
+            }
         }
         model.addAttribute("article", article);
         // 上一篇下一篇

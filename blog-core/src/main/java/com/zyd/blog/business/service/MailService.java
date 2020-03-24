@@ -22,7 +22,7 @@ public interface MailService {
      * @param mailDetail
      * @return
      */
-    void send(MailDetail mailDetail);
+    String send(MailDetail mailDetail);
 
     /**
      * 发送友情链接邮件通知
@@ -56,4 +56,14 @@ public interface MailService {
      * @param comment
      */
     void sendToAdmin(Comment comment);
+
+    /**
+     * 用户注册邮件通知
+     */
+    String sendToRegister(String mail,String code);
+
+    /**
+     * 用户忘记密码邮件通知
+     */
+    String sendToUserForgetPass(String mail,String code);
 }

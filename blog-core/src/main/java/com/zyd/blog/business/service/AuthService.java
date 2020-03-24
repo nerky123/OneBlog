@@ -16,4 +16,12 @@ public interface AuthService {
     boolean revoke(String source, Long userId);
 
     void logout();
+
+    String sendMail(String mail,String code,String action);
+
+    String register(String mail, String pass, String name, String code);
+
+    boolean login(String mail,String pass,String remoteAddr);
+
+    String forget(String pass, String code,String mail);
 }

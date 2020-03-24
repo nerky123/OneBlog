@@ -291,6 +291,8 @@ public class BizArticleServiceImpl implements BizArticleService {
             article.setRecommended(!article.getRecommended());
         } else if ("comment".equals(type)) {
             article.setComment(!article.getComment());
+        } else if ("vip".equals(type)) {
+            article.setVip(!article.getVip());
         } else {
             throw new ZhydException(ResponseStatus.INVALID_PARAMS.getMessage());
         }

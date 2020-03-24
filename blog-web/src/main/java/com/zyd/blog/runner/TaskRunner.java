@@ -6,6 +6,9 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 /**
  * 执行保存文章浏览记录任务
  *
@@ -20,6 +23,6 @@ public class TaskRunner implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) {
-        articleLookTask.save();
+        Executors.newSingleThreadExecutor().execute(()->articleLookTask.save());
     }
 }

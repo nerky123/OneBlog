@@ -15,11 +15,11 @@
                         <h1 class="disclaimer-title">
                             <strong>免责声明</strong>
                         </h1>
-                        <p>作者：<a href="${config.siteUrl}" title="网站作者">${config.authorName}</a>&nbsp;&nbsp;&nbsp;&nbsp; 发布时间：2018年3月16日</p>
+                        <p>作者：<a href="${config.siteUrl}" title="网站作者">${config.authorName}</a>&nbsp;&nbsp;&nbsp;&nbsp; 发布时间：2020年3月16日</p>
                     </div>
                     <div class="disclaimer-body">
                         <ul class="list-unstyled disclaimer-box">
-                            <li>1、本网站属于个人非赢利性质的网站，所有转载的文章都以遵循原作者的版权声明注明了文章来源。</li>
+                            <li>1、本网站属于个人非赢利性质的网站，所有资源均来自互联网，用于网站成员学习探讨。</li>
                             <li>2、如果原文没有版权声明，按照目前互联网开放的原则，本网站将在不通知作者的情况下转载文章。</li>
                             <li>3、如果原文明确注明“禁止转载”，本网站将不会转载。</li>
                             <li>4、如果本网站转载的文章不符合作者的版权声明或者作者不想让本网站转载您的文章，<a href="mailto:${config.authorEmail}" target="_blank" title="点击给我发邮件" rel="external nofollow"><i class="fa fa fa-envelope fa-fw"></i>请邮件告知</a>，本站将会在第一时间删除相关信息！</li>
@@ -28,6 +28,7 @@
                             <li>7、本网站所发布、转载的文章，其版权均归原作者所有。如其他自媒体、网站或个人从本网站下载使用，请在转载有关文章时务必尊重该文章的著作权，保留本网站注明的“原文来源”或者自行去原文处复制版权声明，并自负版权等法律责任。</li>
                             <li>8、本网站的所有原创文章皆可以任意转载，但转载时务必请注明出处。</li>
                             <li>9、尊重原创，知识共享！</li>
+                            <li>10、所有文章仅限用于学习和研究目的，不得用于商业或者非法用途，否则后果自负。您必须在下载后的24个小时内彻底删除。如果喜欢该程序，请支持正版软件！</li>
                         </ul>
                     </div>
                     <div class="article-footer overflow-initial">

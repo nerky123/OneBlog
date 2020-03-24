@@ -13,6 +13,7 @@ server:
         protocol-header: X-Forwarded-Proto
         port-header: X-Forwarded-Port
         uri-encoding: UTF-8
+        basedir: /var/tmp/website-blog-admin
 # SPRING PROFILES
 spring:
     profiles:

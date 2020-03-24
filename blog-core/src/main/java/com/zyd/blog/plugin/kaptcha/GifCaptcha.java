@@ -65,6 +65,14 @@ public class GifCaptcha extends Captcha {
 
     }
 
+
+    public String getRandomString(){
+        alphas();
+        String s = this.text().toLowerCase();
+        SessionUtil.setKaptcha(s);
+        return s;
+    }
+
     /**
      * 画随机码图
      *

@@ -59,9 +59,9 @@ public class LocalApiClient extends BaseApiClient {
                     .setSuffix(this.suffix)
                     .setUploadStartTime(startTime)
                     .setUploadEndTime(new Date())
-                    .setFilePath(this.newFileName)
+                    .setFilePath(realFilePath)
                     .setFileHash(DigestUtils.md5DigestAsHex(fileHashIs))
-                    .setFullFilePath(this.url + this.newFileName);
+                    .setFullFilePath(this.url + realFilePath);
         } catch (Exception e) {
             throw new LocalApiException("[" + this.storageType + "]文件上传失败：" + e.getMessage() + imageUrl);
         } finally {
@@ -81,7 +81,7 @@ public class LocalApiClient extends BaseApiClient {
         if (StringUtils.isEmpty(key)) {
             throw new LocalApiException("[" + this.storageType + "]删除文件失败：文件key为空");
         }
-        File file = new File(this.rootPath + key);
+        File file = new File(key);
         if (!file.exists()) {
             throw new LocalApiException("[" + this.storageType + "]删除文件失败：文件不存在[" + this.rootPath + key + "]");
         }

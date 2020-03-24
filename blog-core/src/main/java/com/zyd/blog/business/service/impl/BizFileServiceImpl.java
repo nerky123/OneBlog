@@ -11,6 +11,8 @@ import com.zyd.blog.file.exception.GlobalFileException;
 import com.zyd.blog.persistence.beans.BizFile;
 import com.zyd.blog.persistence.mapper.BizFileMapper;
 import com.zyd.blog.plugin.file.GlobalFileUploader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,6 +33,7 @@ import java.util.List;
  */
 @Service
 public class BizFileServiceImpl implements BizFileService {
+    private static final Logger log = LoggerFactory.getLogger(BizFileServiceImpl.class);
 
     @Autowired
     private BizFileMapper shopFileMapper;
@@ -81,6 +84,7 @@ public class BizFileServiceImpl implements BizFileService {
                 FileUploader uploader = new GlobalFileUploader();
                 uploader.delete(oldFile.getFilePath(), oldFile.getUploadType());
             } catch (Exception ignored) {
+                log.error("删除文件失败，具体原因：["+ignored.getMessage()+"]");
             }
         }
     }

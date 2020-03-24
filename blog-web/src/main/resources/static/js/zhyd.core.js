@@ -92,7 +92,7 @@
             _initialized: false,
             init: function (options) {
                 if (!this.isSupported()) {
-                    // console.error('Not support websocket');
+                    console.error('Not support websocket');
                     return;
                 }
                 var op = $.extend({
@@ -102,7 +102,7 @@
                     reconnect: false
                 }, options);
                 if (!op.host) {
-                    // console.error("初始化WebSocket失败，无效的请求地址");
+                    console.error("初始化WebSocket失败，无效的请求地址");
                     return;
                 }
                 try {
@@ -113,19 +113,19 @@
                 this._initialized = true;
                 //连接发生错误的回调方法
                 this._this.onerror = function () {
-                    // console.log("与服务器连接失败...");
+                    console.log("与服务器连接失败...");
                 };
 
                 //连接成功建立的回调方法
                 this._this.onopen = function (event) {
-                    // console.log("与服务器连接成功...");
+                    console.log("与服务器连接成功...");
                 };
 
                 //接收到消息的回调方法
                 this._this.onmessage = function (event) {
                     // dwz.notification.show({notification: event.data});
                     op.callback(event.data);
-                    // console.log("接收到服务器端推送的消息：" + event.data);
+                    console.log("接收到服务器端推送的消息：" + event.data);
                 };
 
                 //连接关闭的回调方法
@@ -630,3 +630,5 @@
     };
 })(jQuery);
 /* 文字滚动 end */
+
+

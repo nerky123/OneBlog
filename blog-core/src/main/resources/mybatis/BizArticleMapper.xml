@@ -14,6 +14,7 @@
 		<result property="typeId" jdbcType="BIGINT" column="type_id"/>
 		<result property="status" jdbcType="INTEGER" column="status"/>
 		<result property="top" jdbcType="BIT" column="top"/>
+		<result property="vip" jdbcType="BIT" column="vip"/>
 		<result property="recommended" jdbcType="BIT" column="recommended"/>
 		<result property="original" jdbcType="BIT" column="original"/>
 		<result property="description" jdbcType="VARCHAR" column="description"/>
@@ -46,6 +47,7 @@
 			a.qrcode_path,
 			a.is_markdown,
 			a.top,
+			a.vip,
 			a.type_id,
 			a.`status`,
 			a.recommended,
@@ -139,6 +141,7 @@
 			a.content,
 			a.content_md,
 			a.top,
+			a.vip,
 			a.type_id,
 			a.`status`,
 			a.recommended,
@@ -204,6 +207,7 @@
 			a.qrcode_path,
 			a.is_markdown,
 			a.top,
+			a.vip,
 			a.type_id,
 			a.`status`,
 			a.recommended,

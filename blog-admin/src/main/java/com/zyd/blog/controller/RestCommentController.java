@@ -102,8 +102,8 @@ public class RestCommentController {
                 commentService.commentForAdmin(comment);
             }
             if(null != sendEmail && sendEmail){
-                Comment commentDB = commentService.getByPrimaryKey(comment.getId());
-                mailService.send(commentDB, TemplateKeyEnum.TM_COMMENT_AUDIT, true);
+                /*Comment commentDB = commentService.getByPrimaryKey(comment.getId());
+                mailService.send(commentDB, TemplateKeyEnum.TM_COMMENT_AUDIT, true);*/
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -212,5 +212,9 @@ public class Article {
         Integer loveCount = this.bizArticle.getLoveCount();
         return loveCount == null ? 0 : loveCount;
     }
+
+    public void setVip(Boolean vip){this.bizArticle.setVip(vip);}
+
+    public Boolean getVip(){return this.bizArticle.getVip();}
 }
 
